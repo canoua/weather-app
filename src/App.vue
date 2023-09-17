@@ -1,14 +1,18 @@
 <script>
   import axios from 'axios';
+  import сelsius from './assets/сelsius.png';
 
   export default {
     data() {
       return{
         city: '',
-        error: ''
+        error: '',
+        info: null,
+        imageSrc: сelsius
       }
     },
     methods: {
+      //валидация формы и получения данных погоды
       getWeather() {
         if(this.city.trim().length < 3) {
           this.error = 'Введите корректное значение';
@@ -17,7 +21,8 @@
           this.error=''
         }
 
-        axios.get();
+        axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.city}&appid=d4cea6e448f300abb46acd7e5a624672&units=metric`)
+          .then(res => (this.info = res.data))
       }
     }
   }
@@ -26,13 +31,22 @@
 <template>
   <div class="app">
     <h1 class="title">Погода</h1>
-    <p class="info" v-if="city!=''">Узнаем погоду в городе {{ city }}</p>
+    <p class="info" v-if="city!=''">Узнаем погоду в городе {{city}}</p>
     <p class="info" v-else disabled>Введите название города {{ city }}</p>
     <div class="app-box">
       <input class="input" v-model="city" type="text" placeholder="Город">
       <button class="btn" v-on:click="getWeather()">Узнать</button>
     </div>
     <div class="error">{{ error }}</div>
+    <p class="weather-number" v-if="info != null">
+      <span>  
+        {{ Math.round(info.main.temp) }}
+      </span>
+      <img class="сelsius" :src="imageSrc" alt="image">
+    </p>
+    <p v-if="info !=null">
+      {{ info.main.temp_min }}
+    </p>
   </div>
 </template>
 
@@ -80,6 +94,17 @@
     padding: 5px 10px;
     font-size: 25px;
     font-family: 'Roboto';
+  }
+  .weather-number{
+    font-size: 40px;
+    font-weight: 70;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .сelsius{
+    width: 40px;
+    margin-left: 10px;
   }
   .error{
     color: red;
