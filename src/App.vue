@@ -11,11 +11,13 @@
     methods: {
       getWeather() {
         if(this.city.trim().length < 3) {
-          this.error = 'Введите корректное знвчение';
+          this.error = 'Введите корректное значение';
           return false
         } else{
           this.error=''
         }
+
+        axios.get();
       }
     }
   }
@@ -77,9 +79,11 @@
     border-radius: 10px;
     padding: 5px 10px;
     font-size: 25px;
+    font-family: 'Roboto';
   }
   .error{
     color: red;
-    /* display: none; */
+    margin-top: 10px;
+    font-size: 20px;
   }
 </style>
