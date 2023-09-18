@@ -31,29 +31,30 @@
 <template>
   <div class="app">
     <h1 class="title">Погода</h1>
-    <p class="info" v-if="city!=''">Узнаем погоду в городе {{city}}</p>
-    <p class="info" v-else disabled>Введите название города {{ city }}</p>
+    <p class="info" v-if="city!=''">Узнаем погоду в городе "{{city}}"</p>
+    <p class="info" v-else disabled>Введите название города "{{ city }}"</p>
     <div class="app-box">
       <input class="input" v-model="city" type="text" placeholder="Город">
       <button class="btn" v-on:click="getWeather()">Узнать</button>
     </div>
     <div class="error">{{ error }}</div>
-    <p class="weather-number" v-if="info != null">
+    <p class="weather-temp" v-if="info != null">
       <span>  
         {{ Math.round(info.main.temp) }}
       </span>
       <img class="сelsius" :src="imageSrc" alt="image">
     </p>
-    <p v-if="info !=null">
-      {{ info.main.temp_min }}
+    <p class="weather-min-temp" v-if="info !=null">
+      {{ "Минимальная температура: " + Math.round(info.main.temp_min) }}
+    </p>
+    <p class="weather-max-temp" v-if="info != null">
+      {{ "Максимальная температура: " + Math.round(info.main.temp_max) }}
     </p>
   </div>
 </template>
 
 <style>
   .app{
-    width: 100%;
-    height: 100%;
     padding: 50px;
     border-radius: 10px;
     background-color: #F8D568;
@@ -95,12 +96,19 @@
     font-size: 25px;
     font-family: 'Roboto';
   }
-  .weather-number{
+  .weather-temp,
+  .weather-min-temp,
+  .weather-max-temp{
     font-size: 40px;
     font-weight: 70;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 20px;
+  }
+  .weather-min-temp,
+  .weather-max-temp{
+    font-size: 25px;
   }
   .сelsius{
     width: 40px;
