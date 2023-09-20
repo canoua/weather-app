@@ -32,7 +32,7 @@
   <div class="app">
     <h1 class="title">Погода</h1>
     <p class="info" v-if="city!=''">Узнаем погоду в городе "{{city}}"</p>
-    <p class="info" v-else disabled>Введите название города "{{ city }}"</p>
+    <p class="info" v-else disabled>Введите название города</p>
     <div class="app-box">
       <input class="input" v-model="city" type="text" placeholder="Город">
       <button class="btn" v-on:click="getWeather()">Узнать</button>
@@ -66,6 +66,8 @@
     background-color: #fff;
     padding: 5px;
     border-radius: 10px;
+    max-width: 455px;
+    margin: 0 auto;
   }
   .title{
     margin-bottom: 50px;
@@ -118,5 +120,41 @@
     color: red;
     margin-top: 10px;
     font-size: 20px;
+  }
+
+  @media(max-width: 767px) {
+    .app{
+      padding: 20px;
+    }
+    .title {
+      margin-bottom: 30px;
+      font-size: 35px;
+    }
+    .input{
+      width: 75%;
+    }
+  }
+
+  @media(max-width: 491px) {
+    .app{
+      padding: 15px;
+    }
+    .title,
+    .info{
+      margin-bottom: 15px;
+    }
+    .weather-temp, .weather-min-temp, .weather-max-temp {
+      margin-bottom: 15px;
+    }
+    .input{  
+      padding: 6px;
+    }
+  }
+
+  @media(max-width: 440px) {
+    
+    .weather-min-temp, .weather-max-temp, .info {
+      font-size: 18px;
+    }
   }
 </style>

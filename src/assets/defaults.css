@@ -20,3 +20,26 @@ body{
   justify-content: center;
   align-content: center;
 }
+
+@media(max-width: 767px) {
+  body{
+    display: block;
+    padding: 50px;
+  }
+
+  #app{
+    display: block;
+  }
+}
+
+@media(max-width: 575px) {
+  body{
+    padding: 30px;
+  }
+}
+
+@media(max-width: 491px) {
+  body{
+    padding: 15px;
+  }
+}
