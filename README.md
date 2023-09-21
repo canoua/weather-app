@@ -12,6 +12,5 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 # Сделать
 
 - анимацию при загрузке данных
-- адаптив
 - градиентный фон
-- деплой на vercel
+- деплой на vercel(нужно ли постоянно обновлять билд?)
