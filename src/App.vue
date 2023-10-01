@@ -33,10 +33,10 @@
     <h1 class="title">Погода</h1>
     <p class="info" v-if="city!=''">Узнаем погоду в городе "{{city}}"</p>
     <p class="info" v-else disabled>Введите название города</p>
-    <div class="app-box">
+    <form action="#" class="app-box">
       <input class="input" v-model="city" type="text" placeholder="Город">
-      <button class="btn" v-on:click="getWeather()">Узнать</button>
-    </div>
+      <button class="btn" type="submit" v-on:click="getWeather()">Узнать</button>
+    </form>
     <div class="error">{{ error }}</div>
     <p class="weather-temp" v-if="info != null">
       <span>  
@@ -50,10 +50,21 @@
     <p class="weather-max-temp" v-if="info != null">
       {{ "Максимальная температура: " + Math.round(info.main.temp_max) }}
     </p>
+    <p class="weather-feels-like" v-if="info != null">
+      {{ "Чувствуется как: " + Math.round(info.main.feels_like) }}
+    </p>
+    <p class="weather-wind-speed" v-if="info != null">
+      {{ "Скорость ветра: " + Math.round(info.wind.speed) + "м/с" }}
+    </p>
   </div>
 </template>
 
 <style>
+  body{
+    background: -webkit-linear-gradient(45deg, rgb(251, 251, 251) 22%, rgb(248, 213, 104) 100%);
+    background: -moz-linear-gradient(45deg, rgb(251, 251, 251) 22%, rgb(248, 213, 104) 100%);
+    background: linear-gradient(45deg, rgb(251, 251, 251) 22%, rgb(248, 213, 104) 100%);
+  }
   .app{
     padding: 50px;
     border-radius: 10px;
@@ -100,7 +111,9 @@
   }
   .weather-temp,
   .weather-min-temp,
-  .weather-max-temp{
+  .weather-max-temp,
+  .weather-feels-like,
+  .weather-wind-speed{
     font-size: 40px;
     font-weight: 70;
     display: flex;
@@ -109,7 +122,9 @@
     margin-bottom: 20px;
   }
   .weather-min-temp,
-  .weather-max-temp{
+  .weather-max-temp,
+  .weather-feels-like,
+  .weather-wind-speed{
     font-size: 25px;
   }
   .сelsius{
